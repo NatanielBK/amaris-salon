@@ -1,0 +1,170 @@
+/* NBK Projects — intro. Wszystko pod #nbk-intro, żeby nie dotykać stylów strony. */
+#nbk-intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 2147483000;
+  margin: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-clip-path: inset(0 0 0 0);
+  clip-path: inset(0 0 0 0);
+  font: 400 16px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+#nbk-intro *, #nbk-intro *::before, #nbk-intro *::after { box-sizing: border-box; }
+
+#nbk-intro .nbk-i__stage {
+  --w: clamp(230px, 66vw, 340px);
+  width: var(--w);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -3vh;
+}
+@media (min-height: 760px) and (min-width: 700px) {
+  #nbk-intro .nbk-i__stage { --w: clamp(300px, 26vw, 400px); }
+}
+@media (max-height: 520px) {
+  #nbk-intro .nbk-i__stage { --w: min(60vh, 300px); }
+}
+
+#nbk-intro svg { display: block; overflow: visible; shape-rendering: geometricPrecision; }
+
+/* napis nad znakiem */
+#nbk-intro .nbk-i__cap {
+  margin: 0 0 calc(var(--w) * .13);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, .5);
+  opacity: 0;
+  animation: nbk-i-fade-in 500ms cubic-bezier(.22, 1, .36, 1) 1150ms forwards;
+}
+@media (min-width: 700px) { #nbk-intro .nbk-i__cap { font-size: 11.5px; } }
+
+#nbk-intro .nbk-i__word { width: 100%; }
+
+/* NBK: obrys liter rysowany linią (N → B → K, ~0,85 s), potem wypełnienie bielą (0,3 s),
+   na koniec szewron K odjeżdża od trzonu i odsłania szczelinę („|<”) */
+#nbk-intro .nbk-i__nbk { width: 100%; height: auto; aspect-ratio: 339 / 104; }
+#nbk-intro .nbk-i__nbk .d-line {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.4;
+  stroke-linejoin: miter;
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1.05;
+  animation:
+    nbk-i-draw 600ms cubic-bezier(.42, 0, .22, 1) 40ms forwards,
+    nbk-i-fade-out 260ms ease 860ms forwards;
+}
+#nbk-intro .nbk-i__nbk .l-b .d-line { animation-delay: 150ms, 860ms; }
+#nbk-intro .nbk-i__nbk .l-k .d-line { animation-delay: 260ms, 860ms; }
+#nbk-intro .nbk-i__nbk .f-fill {
+  opacity: 0;
+  animation: nbk-i-fade-in 300ms cubic-bezier(.33, 0, .2, 1) 780ms forwards;
+}
+#nbk-intro .nbk-i__nbk .k-chev {
+  transform: translate3d(-7px, 0, 0);
+  animation: nbk-i-open 420ms cubic-bezier(.65, 0, .25, 1) 980ms forwards;
+}
+
+/* projects */
+#nbk-intro .nbk-i__proj {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 339 / 64;
+  margin-top: 9%;
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  animation: nbk-i-rise 560ms cubic-bezier(.22, 1, .36, 1) 1000ms forwards;
+}
+
+/* Pomiń */
+#nbk-intro .nbk-i__skip {
+  position: absolute;
+  right: calc(16px + env(safe-area-inset-right));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  min-height: 44px;
+  min-width: 44px;
+  margin: 0;
+  padding: 0 18px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, .72);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0;
+  animation: nbk-i-fade-in 400ms ease 300ms forwards;
+  transition: color .2s, border-color .2s, background-color .2s;
+}
+#nbk-intro .nbk-i__skip:hover { color: #fff; border-color: rgba(255, 255, 255, .6); }
+#nbk-intro .nbk-i__skip:focus { outline: none; }
+#nbk-intro .nbk-i__skip:focus-visible { color: #fff; border-color: #fff; outline: 2px solid #fff; outline-offset: 3px; }
+
+#nbk-intro .nbk-i__sr {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* wyjście: kurtyna w górę, znak lekko unosi się i gaśnie */
+#nbk-intro.is-out { animation: nbk-i-curtain 500ms cubic-bezier(.76, 0, .24, 1) forwards; pointer-events: none; }
+#nbk-intro.is-out .nbk-i__stage { animation: nbk-i-lift 500ms cubic-bezier(.76, 0, .24, 1) forwards; }
+#nbk-intro.is-out .nbk-i__skip { opacity: 0; transition: opacity 150ms; animation: none; }
+#nbk-intro.is-out.is-fast,
+#nbk-intro.is-out.is-fast .nbk-i__stage { animation-duration: 380ms; }
+
+@keyframes nbk-i-draw { to { stroke-dashoffset: 0; } }
+@keyframes nbk-i-open { to { transform: translate3d(0, 0, 0); } }
+@keyframes nbk-i-rise { to { opacity: 1; transform: translate3d(0, 0, 0); } }
+@keyframes nbk-i-fade-in { to { opacity: 1; } }
+@keyframes nbk-i-curtain {
+  from { -webkit-clip-path: inset(0 0 0 0); clip-path: inset(0 0 0 0); }
+  to { -webkit-clip-path: inset(0 0 100% 0); clip-path: inset(0 0 100% 0); }
+}
+@keyframes nbk-i-lift {
+  to { opacity: 0; transform: translate3d(0, -7vh, 0); }
+}
+@keyframes nbk-i-fade-out { to { opacity: 0; } }
+
+/* ograniczony ruch: bez rysowania (od razu pełne NBK ze szczeliną), krótko i fade 300 ms */
+@media (prefers-reduced-motion: reduce) {
+  #nbk-intro .nbk-i__nbk .f-fill,
+  #nbk-intro .nbk-i__nbk .k-chev,
+  #nbk-intro .nbk-i__nbk,
+  #nbk-intro .nbk-i__proj,
+  #nbk-intro .nbk-i__cap,
+  #nbk-intro .nbk-i__skip { animation: none; opacity: 1; transform: none; }
+  #nbk-intro .nbk-i__nbk .d-line { display: none; animation: none; }
+  #nbk-intro.is-out,
+  #nbk-intro.is-out.is-fast { animation: nbk-i-fade-out 300ms ease forwards; }
+  #nbk-intro.is-out .nbk-i__stage { animation: none; }
+  #nbk-intro.is-out.is-fast { animation-duration: 200ms; }
+}
