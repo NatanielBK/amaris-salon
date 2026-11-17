@@ -225,4 +225,22 @@
     try { d.execCommand('copy'); } catch (e) { /* brak */ }
     body.removeChild(ta);
   }
+
+  /* ---------- Fokus klawiatury w mapie ----------
+     Iframe Google (inna domena) nie dostaje :focus w naszym dokumencie, więc po wejściu Tabem
+     dokładamy klasę – obwódka jak przy innych elementach. Kliknięcie myszą jej nie pokazuje. */
+  var mapy = d.querySelectorAll('.mapa iframe');
+  if (mapy.length) {
+    var klawiatura = false;
+    d.addEventListener('keydown', function (e) { if (e.key === 'Tab') klawiatura = true; }, true);
+    d.addEventListener('pointerdown', function () { klawiatura = false; }, true);
+    var sprawdz = function () {
+      var a = d.activeElement;
+      if (klawiatura && a && a.tagName === 'IFRAME' && a.closest('.mapa')) a.classList.add('fokus');
+    };
+    window.addEventListener('blur', function () { sprawdz(); setTimeout(sprawdz, 0); });
+    window.addEventListener('focus', function () {
+      mapy.forEach(function (m) { m.classList.remove('fokus'); });
+    });
+  }
 })();
