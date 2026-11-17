@@ -225,7 +225,8 @@ main { display: block; padding-bottom: var(--sekcja); }
 
 /* ---------- Status otwarcia ---------- */
 .status { display: inline-flex; align-items: center; gap: 10px; font: 500 14px/1.35 var(--sans); color: var(--tekst); }
-.status__kropka { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--taupe); box-shadow: 0 0 0 4px rgba(140, 127, 112, .16); }
+/* margin-left = poświata (4px), żeby kropka z obwódką nie wystawała przed krawędź tekstu */
+.status__kropka { flex: none; margin-left: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--taupe); box-shadow: 0 0 0 4px rgba(140, 127, 112, .16); }
 .status[data-stan='otwarte'] .status__kropka { background: var(--otwarte); box-shadow: 0 0 0 4px rgba(95, 122, 52, .16); }
 .status[data-stan='zamkniete'] .status__kropka { background: var(--zamkniete); box-shadow: 0 0 0 4px rgba(160, 105, 76, .16); }
 
@@ -485,7 +486,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 }
 .mapa-rama::before {
   content: ''; position: absolute; z-index: -1; top: -13px; right: -13px; bottom: 13px; left: 13px;
-  border: 1px solid var(--mosiadz); border-radius: 24px; opacity: .85; pointer-events: none;
+  border: 1px solid var(--mosiadz); border-radius: 22px; opacity: .85; pointer-events: none;
 }
 .mapa { position: relative; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 15px; background: var(--tlo-2); }
 @media (min-width: 900px) { .mapa { aspect-ratio: 4 / 3; } }
@@ -675,6 +676,11 @@ main { display: block; padding-bottom: var(--sekcja); }
   .na-co__nazwa { font-size: 21px; margin-top: 14px; }
 }
 .okazje { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+/* okazje pod kafelkami „Na co bon?”: własny wiersz z podpisem, oddzielony od podpisów kafli */
+.okazje-wiersz { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 36px; padding-top: 26px; border-top: 1px solid var(--linia); }
+@media (min-width: 900px) { .okazje-wiersz { margin-top: 56px; padding-top: 32px; } }
+.okazje-wiersz .okazje { margin-top: 0; }
+.okazje-wiersz__tytul { font: italic 500 20px/1.2 var(--serif); color: var(--tekst-2); }
 .okazje li { padding: 7px 15px; border: 1px solid var(--linia); border-radius: var(--pill); font-size: 14px; color: var(--tekst-2); background: var(--karta); }
 
 /* ---------- O salonie ---------- */
@@ -689,8 +695,13 @@ main { display: block; padding-bottom: var(--sekcja); }
 .kontakt-siatka { display: grid; gap: 16px; }
 @media (min-width: 900px) { .kontakt-siatka { grid-template-columns: 1fr 1fr; gap: 24px; } }
 .kafel { padding: 26px 22px; background: var(--karta); border: 1px solid var(--linia); border-radius: var(--r-l); }
-@media (min-width: 900px) { .kafel { padding: 40px; } }
-.kafel .etykieta { margin-bottom: 8px; }
+@media (min-width: 900px) {
+  .kafel { padding: 40px; display: flex; flex-direction: column; }
+  /* adres na dole karty – wyrównany z ostatnim wierszem godzin, bez pustego pola */
+  .kafel > .kafel__sekcja:last-child { margin-top: auto; }
+  .kafel__cta { margin-bottom: 28px; }
+}
+.kafel .etykieta { display: flex; margin-bottom: 8px; }
 .kafel__tel { display: inline-block; margin-top: 4px; font: 500 40px/1.1 var(--serif); letter-spacing: .01em; color: var(--akcent); text-decoration: none; }
 .kafel__tel:hover { color: var(--akcent-ciemny); }
 .kafel__cta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
@@ -702,7 +713,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 .kafel__fb { display: inline-flex; align-items: center; gap: 10px; color: var(--tekst-2); text-decoration: none; min-height: 44px; font-size: 15px; }
 .kafel__fb:hover { color: var(--akcent); }
 .kafel__fb .ikona { width: 22px; height: 22px; }
-.kafel__status { margin-top: 6px; }
+.kafel__status { display: flex; margin-top: 4px; }
 .godziny { width: 100%; margin-top: 18px; border-collapse: collapse; font-size: 16px; }
 .godziny th, .godziny td { padding: 10px 0; border-bottom: 1px solid var(--linia); text-align: left; font-weight: 400; }
 .godziny td { text-align: right; font-variant-numeric: tabular-nums; }
@@ -711,6 +722,8 @@ main { display: block; padding-bottom: var(--sekcja); }
 .godziny tr.dzis th::after { content: 'dziś'; margin-left: 10px; font: 500 11px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--mosiadz-tekst); }
 .godziny .zamk { color: var(--tekst-2); }
 .kopiuj-info { min-height: 1.4em; margin-top: 8px; font-size: 14px; color: var(--otwarte); }
+/* pusty komunikat nie zajmuje miejsca (region live zostaje w drzewie dostępności) */
+.kopiuj-info:empty { min-height: 0; margin-top: 0; }
 
 .faq { border-top: 1px solid var(--linia); max-width: 820px; }
 .faq details { border-bottom: 1px solid var(--linia); }
@@ -828,3 +841,7 @@ main { display: block; padding-bottom: var(--sekcja); }
   .stopka { background: none; color: #000; }
   a[href^="tel:"]::after { content: " (" attr(href) ")"; }
 }
+
+/* Cyfry wyrównane do linii w dużych liczbach z Cormoranta (domyślnie ma nautyczne: 608 713 812 i 92 „skaczą”).
+   Musi stać po regułach z font: – skrót kasuje font-variant-numeric. Małe numery kursywą (01, 02) zostają nautyczne. */
+.kafel__tel, .pieczec__liczba, .glowa__wynik, .polecenia__liczba, .mapa__zaslepka span:first-of-type { font-variant-numeric: lining-nums; }
