@@ -380,7 +380,8 @@ main { display: block; padding-bottom: var(--sekcja); }
 }
 
 /* ---------- Opinie (slider) ---------- */
-.polecenia { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px; margin-bottom: 32px; }
+.polecenia { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px; margin-bottom: 40px; }
+@media (min-width: 900px) { .polecenia { margin-bottom: 56px; } }
 .polecenia__liczba { font: 500 clamp(68px, 48px + 4vw, 112px)/.85 var(--serif); color: var(--akcent); letter-spacing: -.03em; }
 .polecenia__liczba span { font-size: .5em; vertical-align: .7em; margin-left: 2px; }
 .polecenia__opis { padding-bottom: 6px; }
@@ -562,7 +563,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 .podhero__foto .luk-rama { --ksztalt: var(--luk-szer); }
 .podhero__foto .luk { aspect-ratio: 3 / 2; }
 .podhero__bon {
-  position: absolute; left: -4px; bottom: -26px; width: 50%; max-width: 280px; height: auto;
+  position: absolute; left: 0; bottom: -26px; width: 50%; max-width: 280px; height: auto;
   border-radius: 6px; box-shadow: var(--cien-karta);
 }
 .s-bon .podhero__foto { margin-bottom: 26px; }
@@ -755,7 +756,8 @@ main { display: block; padding-bottom: var(--sekcja); }
 .blad p { margin-top: 14px; color: var(--tekst-2); max-width: 28em; }
 .blad .zaproszenie__cta { margin-top: 28px; }
 .blad__linki { margin-top: 24px; }
-.blad__linki ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 0 24px; max-width: 300px; }
+/* na telefonie 2 × 2 – bez osieroconego „Kontakt” w drugim wierszu */
+.blad__linki ul { list-style: none; display: grid; grid-template-columns: repeat(2, auto); justify-content: center; gap: 0 32px; }
 .blad__linki a { display: inline-flex; align-items: center; min-height: 44px; color: var(--akcent); font-weight: 500; text-decoration: underline; text-decoration-color: var(--mosiadz); text-underline-offset: 4px; }
 @media (min-width: 900px) {
   .blad { padding-top: 64px; }
@@ -763,7 +765,7 @@ main { display: block; padding-bottom: var(--sekcja); }
   .blad__foto { width: auto; max-width: none; margin: 14px 14px 0 0; }
   .blad__tekst { justify-items: start; }
   .blad .orn { justify-content: flex-start; }
-  .blad__linki ul { justify-content: flex-start; max-width: none; }
+  .blad__linki ul { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 0 24px; }
 }
 
 /* ---------- Stopka ---------- */
