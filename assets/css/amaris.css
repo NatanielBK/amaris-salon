@@ -264,7 +264,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 
 /* pieczęć 92% */
 .pieczec {
-  position: absolute; z-index: 2; top: -8px; left: -6px; width: 98px; height: 98px; border-radius: 50%;
+  position: absolute; z-index: 2; left: 12px; bottom: 12px; width: 112px; height: 112px; border-radius: 50%;
   display: grid; place-items: center; text-decoration: none; color: var(--akcent);
   background: var(--karta); box-shadow: 0 1px 2px rgba(42, 37, 32, .08), 0 14px 30px -16px rgba(42, 37, 32, .45);
   transition: box-shadow .3s var(--ease);
@@ -272,8 +272,8 @@ main { display: block; padding-bottom: var(--sekcja); }
 .pieczec::before { content: ''; position: absolute; inset: 24%; border: 1px solid var(--linia); border-radius: 50%; }
 .pieczec::after { content: ''; position: absolute; inset: 4px; border: 1px solid rgba(168, 138, 90, .45); border-radius: 50%; }
 .pieczec__krag { position: absolute; inset: 0; width: 100%; height: 100%; }
-.pieczec__krag text { font: 500 9.4px var(--sans); letter-spacing: .12em; fill: var(--mosiadz-tekst); }
-.pieczec__liczba { position: relative; font: 500 27px/1 var(--serif); letter-spacing: -.02em; }
+.pieczec__krag text { font: 500 9.6px var(--sans); letter-spacing: .1em; fill: var(--mosiadz-tekst); }
+.pieczec__liczba { position: relative; font: 500 31px/1 var(--serif); letter-spacing: -.02em; }
 .pieczec__liczba small { font-size: .55em; vertical-align: .55em; margin-left: 1px; }
 .pieczec:hover { box-shadow: 0 1px 2px rgba(42, 37, 32, .08), 0 18px 36px -14px rgba(42, 37, 32, .55); }
 .pieczec:focus-visible { border-radius: 50%; outline-offset: 4px; }
@@ -286,7 +286,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 @media (min-width: 900px) {
   .hero { padding-top: 40px; }
   .hero::before {
-    content: ''; position: absolute; z-index: -1; right: 0; top: calc(var(--h-naglowek) * -1); bottom: 18%;
+    content: ''; position: absolute; z-index: -1; right: 0; top: calc(var(--h-naglowek) * -1); bottom: 0;
     width: max(34%, calc((100% - var(--wrap)) / 2 + 360px)); background: var(--tlo-2);
   }
   .hero__siatka { grid-template-columns: 1.08fr .92fr; align-items: center; column-gap: 96px; }
@@ -299,14 +299,13 @@ main { display: block; padding-bottom: var(--sekcja); }
   .hero__foto .luk-rama { --ksztalt: var(--luk); }
   .hero__foto .luk { aspect-ratio: 4 / 5; }
   .hero__foto img { object-position: 50% 50%; }
-  .pieczec { top: auto; bottom: 72px; left: -62px; width: 132px; height: 132px; }
-  .pieczec__krag text { font-size: 9.6px; }
+  .pieczec { bottom: 72px; left: -62px; width: 132px; height: 132px; }
   .pieczec__liczba { font-size: 38px; }
 }
 @media (min-width: 1100px) { .hero__siatka { column-gap: 128px; } }
 
 /* ---------- Nagłówki sekcji ---------- */
-.glowa { display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 16px; margin-bottom: 22px; }
+.glowa { display: grid; grid-template-columns: 1fr auto; align-items: baseline; column-gap: 16px; margin-bottom: 22px; }
 .glowa > * { grid-column: 1 / -1; }
 .glowa .etykieta { grid-column: 1; grid-row: 1; }
 .glowa .link { grid-column: 2; grid-row: 1; margin-block: -10px; }
@@ -409,8 +408,9 @@ main { display: block; padding-bottom: var(--sekcja); }
 .opinia__gora { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .opinia__temat { display: flex; align-items: center; gap: 10px; padding-top: 6px; font: 500 11px/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--akcent); }
 .opinia__temat::before { content: ''; width: 18px; height: 1px; background: var(--mosiadz); }
-.opinia__foto { flex: none; width: 52px; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--luk); background: var(--tlo-2); }
+.opinia__foto { flex: none; width: 44px; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--luk); background: var(--tlo-2); }
 .opinia__foto img { width: 100%; height: 100%; object-fit: cover; }
+.opinia__znak { flex: none; height: 30px; margin-top: -4px; font: 400 64px/1 var(--serif); color: var(--mosiadz); opacity: .75; }
 .opinia__cytat { margin: 0; font: italic 500 20px/1.36 var(--serif); color: var(--tekst); hanging-punctuation: first; }
 .opinia__autor {
   margin-top: auto; padding-top: 14px; border-top: 1px solid var(--linia);
@@ -445,7 +445,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 .bon-blok__scena { position: relative; margin-bottom: 12px; }
 .bon-blok__foto { --ksztalt: var(--luk-szer); aspect-ratio: 16 / 9; }
 .bon-blok__karta {
-  position: absolute; right: 10px; bottom: -22px; width: 46%; max-width: 300px; height: auto;
+  position: absolute; left: 10px; bottom: -22px; width: 54%; max-width: 300px; height: auto;
   border-radius: 6px; box-shadow: var(--cien-karta);
 }
 .bon-blok__tekst p { margin-top: 12px; color: var(--tekst-2); max-width: 30em; }
@@ -482,12 +482,12 @@ main { display: block; padding-bottom: var(--sekcja); }
 }
 
 .mapa-rama {
-  position: relative; isolation: isolate; margin: 12px 12px 0 0; padding: 8px;
+  position: relative; isolation: isolate; margin: 7px; padding: 8px;
   background: var(--karta); border: 1px solid var(--linia); border-radius: 22px;
 }
 .mapa-rama::before {
-  content: ''; position: absolute; z-index: -1; top: -13px; right: -13px; bottom: 13px; left: 13px;
-  border: 1px solid var(--mosiadz); border-radius: 22px; opacity: .85; pointer-events: none;
+  content: ''; position: absolute; z-index: -1; inset: -7px;
+  border: 1px solid var(--mosiadz); border-radius: 29px; opacity: .7; pointer-events: none;
 }
 .mapa { position: relative; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 15px; background: var(--tlo-2); }
 @media (min-width: 900px) { .mapa { aspect-ratio: 4 / 3; } }
@@ -563,7 +563,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 .podhero__foto .luk-rama { --ksztalt: var(--luk-szer); }
 .podhero__foto .luk { aspect-ratio: 3 / 2; }
 .podhero__bon {
-  position: absolute; left: 0; bottom: -26px; width: 50%; max-width: 280px; height: auto;
+  position: absolute; left: 0; bottom: -26px; width: 56%; max-width: 300px; height: auto;
   border-radius: 6px; box-shadow: var(--cien-karta);
 }
 .s-bon .podhero__foto { margin-bottom: 26px; }
@@ -605,6 +605,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 .panel .wstep { order: 2; margin-top: 10px; }
 .zabieg-karty { order: 3; list-style: none; display: grid; gap: 26px; margin-top: 28px; }
 .umow { order: 4; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--linia); }
+@media (max-width: 899px) { .umow { display: none; } }
 .umow__tytul { width: 100%; font: 500 12px/1.4 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--tekst-2); }
 .panel__foto { display: none; }
 
@@ -617,7 +618,9 @@ main { display: block; padding-bottom: var(--sekcja); }
   display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--linia);
   font: 500 11px/1.4 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--tekst-2);
 }
-.zabieg-karta__cena a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -14px; color: var(--akcent); text-decoration: underline; text-decoration-color: var(--mosiadz); text-underline-offset: 4px; }
+.zabieg-karta__cena a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-block: -14px; color: var(--akcent); text-decoration: none; }
+.zabieg-karta__cena a span { text-decoration: underline; text-decoration-color: var(--mosiadz); text-underline-offset: 4px; }
+.zabieg-karta__cena .ikona { width: 15px; height: 15px; color: var(--mosiadz-tekst); }
 @media (min-width: 700px) {
   .zabieg-karta { grid-template-columns: 220px 1fr; gap: 32px; }
   .zabieg-karta h3 { font-size: 1.6rem; }
@@ -676,20 +679,25 @@ main { display: block; padding-bottom: var(--sekcja); }
   .na-co { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; overflow: visible; margin-inline: 0; padding: 0; }
   .na-co__nazwa { font-size: 21px; margin-top: 14px; }
 }
-.okazje { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.okazje { list-style: none; display: flex; flex-wrap: wrap; gap: 2px 0; margin-top: 24px; }
 /* okazje pod kafelkami „Na co bon?”: własny wiersz z podpisem, oddzielony od podpisów kafli */
 .okazje-wiersz { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 36px; padding-top: 26px; border-top: 1px solid var(--linia); }
 @media (min-width: 900px) { .okazje-wiersz { margin-top: 56px; padding-top: 32px; } }
 .okazje-wiersz .okazje { margin-top: 0; }
-.okazje-wiersz__tytul { font: italic 500 20px/1.2 var(--serif); color: var(--tekst-2); }
-.okazje li { padding: 7px 15px; border: 1px solid var(--linia); border-radius: var(--pill); font-size: 14px; color: var(--tekst-2); background: var(--karta); }
+.okazje-wiersz__tytul { font: 500 11px/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--akcent); }
+.okazje li { font: italic 400 19px/1.5 var(--serif); color: var(--tekst-2); }
+.okazje li:not(:last-child)::after { content: '·'; margin-inline: 10px; font-style: normal; color: var(--mosiadz); }
 
 /* ---------- O salonie ---------- */
 .o-salonie { display: grid; gap: 32px; align-items: center; }
 .o-salonie__foto .luk { aspect-ratio: 4 / 5; }
 .o-salonie .wstep { margin-top: 14px; }
 .o-salonie .link { margin-top: 8px; }
-@media (max-width: 899px) { .o-salonie__foto { width: 62%; max-width: 300px; } }
+@media (max-width: 899px) {
+  .o-salonie__foto { --ksztalt: var(--luk-szer); }
+  .o-salonie__foto .luk { aspect-ratio: 1 / 1; }
+  .o-salonie__foto img { object-position: 50% 42%; }
+}
 @media (min-width: 900px) { .o-salonie { grid-template-columns: 5fr 7fr; gap: 104px; } }
 
 /* ---------- Kontakt ---------- */
