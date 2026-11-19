@@ -169,9 +169,12 @@ main { display: block; padding-bottom: var(--sekcja); }
   box-shadow: 0 1px 0 rgba(220, 207, 188, .9), 0 12px 28px -24px rgba(42, 37, 32, .5);
 }
 .naglowek__wnetrze { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 100%; }
-.logo { display: inline-flex; align-items: center; flex: none; min-height: 44px; text-decoration: none; border-radius: 4px; }
-.logo img { height: 38px; width: auto; }
-@media (min-width: 1100px) { .logo img { height: 44px; } }
+.logo { display: inline-flex; align-items: center; gap: 10px; flex: none; min-height: 44px; text-decoration: none; border-radius: 4px; }
+.logo__znak img { display: block; height: 34px; width: auto; }
+.logo__tekst { display: flex; flex-direction: column; line-height: 1.05; }
+.logo__nazwa { font: 600 21px/1 var(--serif); letter-spacing: .01em; color: var(--tekst); }
+.logo__podpis { margin-top: 3px; font: 500 9px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--mosiadz-tekst); }
+@media (min-width: 1100px) { .logo__znak img { height: 40px; } .logo__nazwa { font-size: 24px; } .logo__podpis { font-size: 10px; } }
 .nawigacja { display: none; }
 .nawigacja ul { list-style: none; display: flex; gap: 36px; }
 .nawigacja a {
@@ -186,16 +189,24 @@ main { display: block; padding-bottom: var(--sekcja); }
 .nawigacja a:hover::after, .nawigacja a[aria-current='page']::after { opacity: 1; }
 .nawigacja a[aria-current='page'] { color: var(--akcent); }
 .naglowek__tel { display: none; }
+.naglowek__akcje { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.naglowek__fb {
+  display: inline-grid; place-items: center; width: 44px; height: 44px; margin-right: -4px;
+  border-radius: var(--pill); color: var(--tekst); transition: color .25s var(--ease);
+}
+.naglowek__fb .ikona { width: 22px; height: 22px; }
+.naglowek__fb:hover, .naglowek__fb:focus-visible { color: var(--akcent); }
 .menu-przycisk {
   display: inline-grid; place-items: center; width: 48px; height: 48px; margin-right: -12px;
   background: none; border: 0; border-radius: var(--pill); color: var(--tekst); cursor: pointer;
 }
 .menu-przycisk .ikona { width: 28px; height: 28px; }
 .menu-przycisk:hover { color: var(--akcent); }
-@media (min-width: 600px) and (max-width: 979px) { .naglowek__tel { display: inline-flex; margin-left: auto; margin-right: 8px; } }
+@media (min-width: 600px) and (max-width: 979px) { .naglowek__tel { display: inline-flex; margin-right: 8px; } }
 @media (min-width: 980px) {
   .nawigacja { display: block; }
   .naglowek__tel { display: inline-flex; }
+  .naglowek__akcje { margin-left: 0; }
   .menu-przycisk { display: none; }
 }
 
@@ -229,6 +240,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 .status__kropka { flex: none; margin-left: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--taupe); box-shadow: 0 0 0 4px rgba(140, 127, 112, .16); }
 .status[data-stan='otwarte'] .status__kropka { background: var(--otwarte); box-shadow: 0 0 0 4px rgba(95, 122, 52, .16); }
 .status[data-stan='zamkniete'] .status__kropka { background: var(--zamkniete); box-shadow: 0 0 0 4px rgba(160, 105, 76, .16); }
+.status[data-stan='sobota'] .status__kropka { background: var(--mosiadz-tekst); box-shadow: 0 0 0 4px rgba(117, 96, 59, .16); }
 
 /* ---------- Łuk (motyw marki) ---------- */
 .luk { position: relative; display: block; overflow: hidden; border-radius: var(--ksztalt); background: var(--tlo-2); }
@@ -329,7 +341,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 .kategorie > li { scroll-snap-align: start; }
 @media (min-width: 600px) { .kategorie { grid-auto-columns: 38%; gap: 20px; } }
 @media (min-width: 1000px) {
-  .kategorie { grid-auto-flow: row; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; overflow: visible; margin-inline: 0; padding: 0; }
+  .kategorie { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; overflow: visible; margin-inline: 0; padding: 0; }
 }
 .kategoria {
   display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: baseline; align-content: start;
@@ -346,6 +358,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 }
 .kategoria__tytul .ikona { width: 18px; height: 18px; color: var(--mosiadz); transition: transform .3s var(--ease), color .3s; }
 .kategoria__opis { grid-column: 1 / -1; margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--linia); font-size: 14px; line-height: 1.5; color: var(--tekst-2); }
+.kategoria__cena { grid-column: 1 / -1; margin-top: 6px; font: 500 13px/1 var(--sans); letter-spacing: .02em; color: var(--mosiadz-tekst); }
 @media (max-width: 599px) { .kategoria__opis { display: none; } }
 .kategoria:hover .kategoria__foto::before { opacity: .14; }
 .kategoria:hover .kategoria__tytul { color: var(--akcent); }
@@ -594,7 +607,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 .zakladka[aria-selected='true'] { background: var(--akcent); color: var(--tlo); }
 .zakladka[aria-selected='true'] .zakladka__nr { color: rgba(247, 242, 234, .75); }
 .zakladka:focus-visible { outline-offset: -4px; outline-color: var(--mosiadz); }
-@media (min-width: 768px) { .zakladki { grid-template-columns: repeat(4, 1fr); border-radius: var(--pill); } }
+@media (min-width: 768px) { .zakladki { grid-template-columns: repeat(3, 1fr); border-radius: var(--r-l); } }
 .zakladki-nota { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; font-size: 14px; color: var(--tekst-2); }
 .zakladki-nota .ikona { width: 18px; height: 18px; margin-top: 2px; color: var(--akcent); }
 
@@ -603,44 +616,47 @@ main { display: block; padding-bottom: var(--sekcja); }
 .panel__opis { display: contents; }
 .panel h2 { order: 1; font-size: 2rem; }
 .panel .wstep { order: 2; margin-top: 10px; }
-.zabieg-karty { order: 3; list-style: none; display: grid; gap: 26px; margin-top: 28px; }
+.panel__cytat { order: 3; margin-top: 22px; padding-left: 16px; border-left: 2px solid var(--mosiadz); font: italic 500 17px/1.5 var(--serif); color: var(--tekst-2); }
+.panel__cytat p { margin: 0; }
+.panel__cytat cite { display: block; margin-top: 6px; font: 500 12px/1.3 var(--sans); font-style: normal; letter-spacing: .06em; color: var(--mosiadz-tekst); }
 .umow { order: 4; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--linia); }
 @media (max-width: 899px) { .umow { display: none; } }
 .umow__tytul { width: 100%; font: 500 12px/1.4 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--tekst-2); }
 .panel__foto { display: none; }
 
-.zabieg-karta { display: grid; grid-template-columns: 40% 1fr; gap: 18px; align-items: center; }
-.zabieg-karta__foto { aspect-ratio: 4 / 5; }
-.zabieg-karta__nr { font: italic 500 16px/1 var(--serif); color: var(--mosiadz-tekst); }
-.zabieg-karta h3 { margin-top: 6px; font-size: 1.3rem; }
-.zabieg-karta__opis { margin-top: 8px; font-size: 14.5px; line-height: 1.55; color: var(--tekst-2); }
-.zabieg-karta__cena {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--linia);
-  font: 500 11px/1.4 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--tekst-2);
+/* ---------- Cennik ---------- */
+.cennik { order: 5; display: flex; flex-direction: column; gap: 30px; margin-top: 28px; }
+.cennik-grupa__tytul { font: 500 1.05rem/1.3 var(--serif); color: var(--tekst); }
+.cennik-grupa__uwaga { display: flex; gap: 8px; align-items: flex-start; margin-top: 6px; font-size: 13px; line-height: 1.5; color: var(--tekst-2); }
+.cennik-grupa__uwaga .ikona { width: 15px; height: 15px; margin-top: 2px; color: var(--akcent); flex: none; }
+.cennik-lista { list-style: none; margin-top: 10px; display: flex; flex-direction: column; }
+.cennik-poz { display: flex; align-items: baseline; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--linia); }
+.cennik-poz__nazwa {
+  flex: 1 1 auto; min-width: 0; font-size: 15px; line-height: 1.4; color: var(--tekst);
+  border-bottom: 1px dotted var(--mosiadz); padding-bottom: 3px;
 }
-.zabieg-karta__cena a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-block: -14px; color: var(--akcent); text-decoration: none; }
-.zabieg-karta__cena a span { text-decoration: underline; text-decoration-color: var(--mosiadz); text-underline-offset: 4px; }
-.zabieg-karta__cena .ikona { width: 15px; height: 15px; color: var(--mosiadz-tekst); }
-@media (min-width: 700px) {
-  .zabieg-karta { grid-template-columns: 220px 1fr; gap: 32px; }
-  .zabieg-karta h3 { font-size: 1.6rem; }
-  .zabieg-karta__opis { font-size: 15.5px; }
-}
+.cennik-poz__cena { flex: 0 0 auto; font: 500 15px/1.3 var(--sans); font-variant-numeric: tabular-nums; color: var(--tekst); white-space: nowrap; }
+.cennik-poz--dopl { padding: 7px 0; }
+.cennik-poz--dopl .cennik-poz__nazwa { font-size: 13.5px; color: var(--tekst-2); border-bottom-color: var(--linia); }
+.cennik-poz--dopl .cennik-poz__cena { font-size: 13.5px; color: var(--mosiadz-tekst); }
+.cennik-poz--warianty { flex-direction: column; align-items: stretch; gap: 8px; }
+.cennik-poz__glowna { font: 500 15px/1.4 var(--sans); color: var(--tekst); }
+.cennik-warianty { list-style: none; margin-top: 2px; display: flex; flex-direction: column; gap: 6px; padding-left: 14px; }
+.cennik-wariant { display: flex; align-items: baseline; gap: 10px; }
+.cennik-wariant .cennik-poz__nazwa { font-size: 13.5px; color: var(--tekst-2); }
+.cennik-wariant .cennik-poz__cena { font-size: 13.5px; }
 @media (min-width: 900px) {
   .panel { display: grid; grid-template-columns: 4fr 7fr; gap: 80px; align-items: start; margin-top: 64px; }
   .panel__opis { display: block; position: sticky; top: calc(var(--h-naglowek) + 32px); }
   .panel h2 { font-size: 2.6rem; }
   .panel .wstep { margin-top: 14px; }
-  .zabieg-karty { margin-top: 0; gap: 0; }
-  .zabieg-karta { padding: 32px 0; border-top: 1px solid var(--linia); }
-  .zabieg-karta:first-child { padding-top: 0; border-top: 0; }
   .umow { margin-top: 32px; }
+  .cennik { margin-top: 0; gap: 40px; }
   /* kolumna opisu na komputerze nie zostaje pusta: zdjęcie kategorii w łuku z mosiężnym obrysem */
   .panel__foto { display: block; max-width: 280px; margin-top: 44px; }
   .panel__foto .luk { aspect-ratio: 4 / 5; }
 }
 @media (min-width: 900px) and (max-height: 820px) { .panel__foto { max-width: 220px; margin-top: 36px; } }
-@media (min-width: 1100px) { .zabieg-karta { grid-template-columns: 250px 1fr; gap: 48px; } }
 
 /* ---------- Bon (podstrona) ---------- */
 .dwie-kol { display: grid; gap: 28px; }
@@ -784,7 +800,9 @@ main { display: block; padding-bottom: var(--sekcja); }
 .stopka a { color: inherit; text-decoration: none; }
 .stopka a:hover { text-decoration: underline; text-decoration-color: var(--mosiadz); text-underline-offset: 4px; }
 .stopka__gora { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 20px; margin-bottom: 22px; border-bottom: 1px solid rgba(168, 138, 90, .4); }
-.stopka__logo { height: 40px; width: auto; }
+.stopka__logo .logo__znak img { height: 40px; width: auto; }
+.stopka__logo .logo__nazwa { color: var(--tlo); }
+.stopka__logo .logo__podpis { color: rgba(247, 242, 234, .65); }
 .stopka__motto { display: none; font: italic 500 22px/1.3 var(--serif); color: rgba(247, 242, 234, .82); max-width: 24em; text-align: right; }
 .stopka__siatka { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px 20px; }
 .stopka h2 { margin-bottom: 10px; font: 500 11.5px/1.4 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: rgba(247, 242, 234, .7); }
@@ -804,7 +822,8 @@ main { display: block; padding-bottom: var(--sekcja); }
 @media (min-width: 600px) { .stopka__siatka { grid-template-columns: 1fr 1fr 1fr; } .stopka__linki { display: block; } .stopka__motto { display: block; } }
 @media (min-width: 900px) {
   .stopka__gora { padding-bottom: 40px; margin-bottom: 48px; }
-  .stopka__logo { height: 48px; }
+  .stopka__logo .logo__znak img { height: 48px; }
+  .stopka__logo .logo__nazwa { font-size: 26px; }
   .stopka__siatka { grid-template-columns: 1.3fr 1fr .7fr; gap: 64px; }
   .stopka ul { font-size: 15px; gap: 6px; }
 }

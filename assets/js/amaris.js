@@ -66,9 +66,9 @@
   }
 
   /* ---------- Status otwarcia (czas w Polsce) ---------- */
-  // 0 = niedziela … 6 = sobota; [otwarcie, zamknięcie] w minutach
-  var GODZINY = { 0: null, 1: [600, 1080], 2: [540, 1200], 3: [600, 1080], 4: [540, 1200], 5: [540, 1200], 6: [540, 840] };
-  var KIEDY = ['w niedzielę', 'w poniedziałek', 'we wtorek', 'w środę', 'w czwartek', 'w piątek', 'w sobotę'];
+  // pn–pt 10:00–18:00; sobota (wybrane) i niedziela mają własne, stałe komunikaty –
+  // nigdy nie twierdzimy, że w sobotę jest na pewno otwarte.
+  var OTWIERA = 600, ZAMYKA = 1080; // 10:00 / 18:00 w minutach
   function hhmm(m) { return Math.floor(m / 60) + ':' + ('0' + (m % 60)).slice(-2); }
   function teraz() {
     try {
@@ -81,14 +81,13 @@
     }
   }
   function status() {
-    var t = teraz(), g = GODZINY[t.dzien];
-    if (g && t.min >= g[0] && t.min < g[1]) return { stan: 'otwarte', tekst: 'Otwarte do ' + hhmm(g[1]) };
-    if (g && t.min < g[0]) return { stan: 'zamkniete', tekst: 'Zamknięte · otwieramy dziś o ' + hhmm(g[0]) };
-    for (var i = 1; i <= 7; i++) {
-      var dz = (t.dzien + i) % 7, gg = GODZINY[dz];
-      if (gg) return { stan: 'zamkniete', tekst: 'Zamknięte · otwieramy ' + (i === 1 ? 'jutro' : KIEDY[dz]) + ' o ' + hhmm(gg[0]) };
-    }
-    return { stan: 'zamkniete', tekst: 'Zamknięte' };
+    var t = teraz();
+    if (t.dzien === 0) return { stan: 'zamkniete', tekst: 'Zamknięte · otwieramy w poniedziałek o 10:00' };
+    if (t.dzien === 6) return { stan: 'sobota', tekst: 'Wybrane soboty 9:00–14:00 · zadzwoń, by potwierdzić' };
+    if (t.min >= OTWIERA && t.min < ZAMYKA) return { stan: 'otwarte', tekst: 'Otwarte do ' + hhmm(ZAMYKA) };
+    if (t.min < OTWIERA) return { stan: 'zamkniete', tekst: 'Zamknięte · otwieramy dziś o ' + hhmm(OTWIERA) };
+    if (t.dzien === 5) return { stan: 'zamkniete', tekst: 'Zamknięte · otwieramy w poniedziałek o 10:00' };
+    return { stan: 'zamkniete', tekst: 'Zamknięte · otwieramy jutro o 10:00' };
   }
   function odswiezStatus() {
     var s = status();
