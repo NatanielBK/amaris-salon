@@ -271,6 +271,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 .hero__foto img { object-position: 50% 45%; }
 .hero__lead { order: 4; margin-top: 22px; max-width: 30em; color: var(--tekst-2); font-size: 1.0625rem; }
 .hero__cta { order: 5; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+.hero__cta .btn { min-width: 0; }
 .hero__cta .btn { padding-inline: 14px; }
 .hero__status { order: 6; margin-top: 18px; }
 
@@ -325,6 +326,11 @@ main { display: block; padding-bottom: var(--sekcja); }
 .glowa__opis { margin-top: 10px; color: var(--tekst-2); max-width: 34em; }
 .glowa__wynik { font: 500 1.35em/1 var(--serif); color: var(--akcent); }
 @media (max-width: 599px) { .s-index .glowa__opis { display: none; } }
+/* Na telefonie link obok etykiety (kolumna "auto", nowrap) nie mieścił się w 1fr auto i rozpychał całą stronę
+   w poziomie (np. "Wszystkie zabiegi" przy "Sześć obszarów"). Poniżej 768px zjeżdża pod nagłówek, pełną szerokością. */
+.glowa--rzad { grid-template-columns: 1fr; }
+.glowa--rzad .etykieta, .glowa--rzad .link { grid-column: 1; grid-row: auto; }
+.glowa--rzad .link { margin: 4px 0 0; }
 @media (min-width: 768px) {
   .glowa--rzad { grid-template-columns: 1fr auto; align-items: end; column-gap: 48px; margin-bottom: 48px; }
   .glowa--rzad > * { grid-column: 1; grid-row: auto; }
@@ -366,8 +372,17 @@ main { display: block; padding-bottom: var(--sekcja); }
 .kategoria:focus-visible { outline-offset: 6px; }
 @media (min-width: 1100px) { .kategoria__tytul { font-size: 25px; margin-top: 20px; } .kategoria__nr { margin-top: 20px; font-size: 20px; } .kategoria__opis { font-size: 15px; } }
 
-/* ---------- Pas nastroju „Chwila w Amaris” ---------- */
+/* ---------- Zastępnik (kafelek bez zdjęcia) ---------- */
+.zastepnik { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 12px; background: var(--tlo-2); }
+/* selektor .zastepnik .zastepnik__orn (2 klasy) musi pokonać ".luk img"/".kategoria__foto img" (klasa+typ) z wcześniejszych reguł,
+   inaczej te reguły rozciągają 44px ornament na cały kafelek (stąd rozmyty, "powiększony" lotos) */
+.zastepnik .zastepnik__orn { width: 44px; height: 44px; max-width: 44px; max-height: 44px; object-fit: contain; opacity: .55; flex: none; }
+.zastepnik__tytul { font: 500 13px/1.3 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--mosiadz-tekst); }
+
+/* ---------- Pas „Prace z naszego salonu” ---------- */
 .nastroj { padding-top: var(--sekcja); }
+.nastroj__podpis { margin-top: 14px; font: 400 12px/1.4 var(--sans); letter-spacing: .04em; color: var(--tekst-2); text-align: right; }
+@media (min-width: 1000px) { .nastroj__podpis { margin-top: 20px; } }
 .nastroj__tytul { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 18px; margin-bottom: 18px; font-size: 1.6rem; }
 .nastroj__tytul::after { content: ''; height: 1px; background: var(--linia); }
 .nastroj__pas {
@@ -543,6 +558,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 .zaproszenie p { margin-top: 12px; color: var(--tekst-2); max-width: 30em; }
 .zaproszenie .status { margin-top: 18px; }
 .zaproszenie__cta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-top: 22px; }
+.zaproszenie__cta .btn { min-width: 0; }
 .zaproszenie__cta .btn { padding-inline: 14px; }
 .zaproszenie__adres { margin-top: 16px; font-size: 14px; }
 .zaproszenie__adres a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-block: -6px; color: var(--tekst-2); text-decoration: underline; text-decoration-color: var(--mosiadz); text-underline-offset: 4px; }
@@ -711,6 +727,9 @@ main { display: block; padding-bottom: var(--sekcja); }
 .o-salonie__foto .luk { aspect-ratio: 4 / 5; }
 .o-salonie .wstep { margin-top: 14px; }
 .o-salonie .link { margin-top: 8px; }
+.certyfikat { display: flex; align-items: center; gap: 12px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--linia); }
+.certyfikat__zdj { width: 44px; height: auto; border-radius: 4px; box-shadow: var(--cien-karta); }
+.certyfikat__tekst { font: 500 13px/1.3 var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--mosiadz-tekst); }
 @media (max-width: 899px) {
   .o-salonie__foto { --ksztalt: var(--luk-szer); }
   .o-salonie__foto .luk { aspect-ratio: 1 / 1; }
@@ -732,6 +751,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 .kafel__tel { display: inline-block; margin-top: 4px; font: 500 40px/1.1 var(--serif); letter-spacing: .01em; color: var(--akcent); text-decoration: none; }
 .kafel__tel:hover { color: var(--akcent-ciemny); }
 .kafel__cta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+.kafel__cta .btn { min-width: 0; }
 .kafel__cta .btn { padding-inline: 12px; }
 @media (min-width: 560px) and (max-width: 899px), (min-width: 1100px) { .kafel__cta { display: flex; flex-wrap: wrap; } .kafel__cta .btn { padding-inline: 24px; } }
 .kafel__sekcja { margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--linia); }
@@ -876,3 +896,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 /* Cyfry wyrównane do linii w dużych liczbach z Cormoranta (domyślnie ma nautyczne: 608 713 812 i 92 „skaczą”).
    Musi stać po regułach z font: – skrót kasuje font-variant-numeric. Małe numery kursywą (01, 02) zostają nautyczne. */
 .kafel__tel, .pieczec__liczba, .glowa__wynik, .polecenia__liczba, .mapa__zaslepka span:first-of-type { font-variant-numeric: lining-nums; }
+
+/* bon-blok: kartka bonu zaslania podpis zastepnika — podpis zbedny, lotos zostaje */
+.bon-blok__foto .zastepnik__tytul { display: none; }
