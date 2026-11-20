@@ -82,11 +82,14 @@
   }
   function status() {
     var t = teraz();
+    if (t.dzien === 6) {
+      if (t.min < 840) return { stan: 'sobota', tekst: 'Wybrane soboty 9:00–14:00 · zadzwoń, by potwierdzić' };
+      return { stan: 'zamkniete', tekst: 'Zamknięte · otwieramy w poniedziałek o 10:00' };
+    }
     if (t.dzien === 0) return { stan: 'zamkniete', tekst: 'Zamknięte · otwieramy w poniedziałek o 10:00' };
-    if (t.dzien === 6) return { stan: 'sobota', tekst: 'Wybrane soboty 9:00–14:00 · zadzwoń, by potwierdzić' };
     if (t.min >= OTWIERA && t.min < ZAMYKA) return { stan: 'otwarte', tekst: 'Otwarte do ' + hhmm(ZAMYKA) };
     if (t.min < OTWIERA) return { stan: 'zamkniete', tekst: 'Zamknięte · otwieramy dziś o ' + hhmm(OTWIERA) };
-    if (t.dzien === 5) return { stan: 'zamkniete', tekst: 'Zamknięte · otwieramy w poniedziałek o 10:00' };
+    if (t.dzien === 5) return { stan: 'zamkniete', tekst: 'Zamknięte · jutro wybrane soboty 9:00–14:00, zadzwoń' };
     return { stan: 'zamkniete', tekst: 'Zamknięte · otwieramy jutro o 10:00' };
   }
   function odswiezStatus() {
@@ -135,35 +138,46 @@
     reveal.forEach(function (el) { el.classList.add('widoczne'); });
   }
 
-  /* ---------- Slider opinii ---------- */
+  /* ---------- Slider opinii ----------
+     Aktywna (licząca się w liczniku) jest karta, której środek jest najbliżej środka toru. Skrajne
+     karty da się dośrodkować dzięki niewidocznym elementom-wypełniaczom na początku i końcu listy
+     (.slider__wypelniacz w CSS/HTML) – dzięki temu tu nie trzeba liczyć żadnego paddingu w JS. */
   d.querySelectorAll('[data-slider]').forEach(function (s) {
     var tor = s.querySelector('.slider__tor');
-    var elementy = tor.children;
+    var karty = Array.prototype.slice.call(tor.querySelectorAll('.opinia'));
     var wstecz = s.querySelector('[data-wstecz]');
     var dalej = s.querySelector('[data-dalej]');
     var licznik = s.querySelector('.slider__licznik');
-    function krok() {
-      var a = elementy[0], b = elementy[1];
-      return b ? b.offsetLeft - a.offsetLeft : tor.clientWidth;
+    function aktywnaKarta() {
+      var srodek = tor.getBoundingClientRect().left + tor.clientWidth / 2;
+      var nr = 0, min = Infinity;
+      karty.forEach(function (k, i) {
+        var r = k.getBoundingClientRect();
+        var odleglosc = Math.abs((r.left + r.width / 2) - srodek);
+        if (odleglosc < min) { min = odleglosc; nr = i; }
+      });
+      return nr;
     }
     function aktualizuj() {
       var max = tor.scrollWidth - tor.clientWidth;
       s.classList.toggle('bez-przewijania', max < 4);
-      wstecz.disabled = tor.scrollLeft < 4;
-      dalej.disabled = tor.scrollLeft > max - 4;
-      var nr = Math.round(tor.scrollLeft / krok()) + 1;
-      var naEkranie = Math.max(1, Math.round(tor.clientWidth / krok()));
-      if (tor.scrollLeft > max - 4) nr = elementy.length - naEkranie + 1;
-      if (licznik) licznik.textContent = Math.min(nr, elementy.length) + ' / ' + elementy.length;
+      var nr = aktywnaKarta();
+      wstecz.disabled = nr <= 0;
+      dalej.disabled = nr >= karty.length - 1;
+      karty.forEach(function (k, i) { k.classList.toggle('opinia--aktywna', i === nr); });
+      if (licznik) licznik.textContent = (nr + 1) + ' / ' + karty.length;
     }
-    function przesun(kierunek) {
-      tor.scrollBy({ left: kierunek * krok(), behavior: ruchOk ? 'smooth' : 'auto' });
+    function przesunDo(indeks) {
+      indeks = Math.max(0, Math.min(karty.length - 1, indeks));
+      karty[indeks].scrollIntoView({ inline: 'center', block: 'nearest', behavior: ruchOk ? 'smooth' : 'auto' });
     }
-    wstecz.addEventListener('click', function () { przesun(-1); });
-    dalej.addEventListener('click', function () { przesun(1); });
+    wstecz.addEventListener('click', function () { przesunDo(aktywnaKarta() - 1); });
+    dalej.addEventListener('click', function () { przesunDo(aktywnaKarta() + 1); });
     tor.addEventListener('scroll', function () { window.requestAnimationFrame(aktualizuj); }, { passive: true });
     window.addEventListener('resize', aktualizuj);
+    if (karty.length > 1) przesunDo(1); /* start od karty 2, na środku */
     aktualizuj();
+    window.addEventListener('load', aktualizuj);
   });
 
   /* ---------- Zakładki zabiegów ---------- */
