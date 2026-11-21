@@ -4,6 +4,28 @@
   var d = document, root = d.documentElement, body = d.body;
   var ruchOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- Scroll zawsze od góry (bez hasha) ----------
+     Problem: po kliknięciu w link prowadzący do strony, która jest już w historii sesji
+     (np. logo "Amaris" → index.html), WebKit/Safari dociąga dokument do wcześniej zapamiętanej
+     pozycji scrolla tej samej strony – w kilku ratach, w miarę jak rośnie wysokość dokumentu
+     (obrazki/fonty się dociągają) – mimo ustawienia scrollRestoration='manual' i mimo że to nie
+     jest powrót z bfcache (pageshow.persisted=false). Dlatego oprócz wyłączenia automatycznego
+     przywracania wymuszamy 0 w pętli rAF, aż dokument przestanie rosnąć i restoracja ustanie. */
+  function wymusGore() {
+    if (location.hash) return;
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    var bezZmian = 0, poprzedniaWysokosc = 0, koniec = Date.now() + 1200;
+    (function pilnujGory() {
+      if (window.scrollY > 0) { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); bezZmian = 0; }
+      var wysokosc = d.documentElement.scrollHeight;
+      if (wysokosc === poprzedniaWysokosc) bezZmian++; else { bezZmian = 0; poprzedniaWysokosc = wysokosc; }
+      if (Date.now() < koniec && bezZmian < 6) window.requestAnimationFrame(pilnujGory);
+    })();
+  }
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  wymusGore();
+  window.addEventListener('pageshow', function (e) { if (e.persisted) wymusGore(); });
+
   /* ---------- Nagłówek: tło i cień po przewinięciu ---------- */
   var naglowek = d.querySelector('.naglowek');
   function naScroll() {
@@ -64,6 +86,19 @@
       if (m.matches) zamknijMenu(false);
     });
   }
+
+  /* ---------- Logo: na stronie głównej płynny scroll na górę zamiast przeładowania ---------- */
+  function znormalizuj(sciezka) { return sciezka.replace(/index\.html$/, '').replace(/\/+$/, '/'); }
+  d.querySelectorAll('a.logo').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var tu = new URL(a.href, location.href);
+      if (znormalizuj(tu.pathname) === znormalizuj(location.pathname) && !tu.hash) {
+        e.preventDefault();
+        if (menu && otworz) zamknijMenu(false);
+        window.scrollTo({ top: 0, behavior: ruchOk ? 'smooth' : 'auto' });
+      }
+    });
+  });
 
   /* ---------- Status otwarcia (czas w Polsce) ---------- */
   // pn–pt 10:00–18:00; sobota (wybrane) i niedziela mają własne, stałe komunikaty –
