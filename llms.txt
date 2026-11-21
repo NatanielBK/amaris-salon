@@ -74,3 +74,4 @@ Pełny i aktualny cennik: https://studioamaris.pl/zabiegi.html
 - Bon podarunkowy: https://studioamaris.pl/bon.html
 - Opinie: https://studioamaris.pl/opinie.html
 - Kontakt i dojazd: https://studioamaris.pl/kontakt.html
+- Mapa stron (sitemap): https://studioamaris.pl/sitemap.xml

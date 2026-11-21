@@ -140,9 +140,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 }
 .btn .ikona { width: 20px; height: 20px; margin-left: -4px; }
 .btn--glowny { background: var(--akcent); color: var(--tlo); box-shadow: 0 10px 24px -14px rgba(48, 53, 31, .8); }
-.btn--glowny:hover { background: var(--akcent-ciemny); box-shadow: 0 14px 28px -14px rgba(48, 53, 31, .9); }
 .btn--obrys { background: transparent; color: var(--akcent); border-color: rgba(74, 80, 54, .5); }
-.btn--obrys:hover { border-color: var(--akcent); background: rgba(74, 80, 54, .06); }
 .btn--maly { min-height: 44px; padding: 0 18px; font-size: 14px; }
 .btn--maly .ikona { width: 18px; height: 18px; }
 .btn:focus-visible { outline-offset: 3px; border-radius: var(--pill); }
@@ -153,10 +151,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 }
 .link span { background: linear-gradient(var(--mosiadz), var(--mosiadz)) 0 100% / 100% 1px no-repeat; padding-bottom: 3px; }
 .link .ikona { width: 18px; height: 18px; transition: transform .3s var(--ease); }
-.link:hover .ikona { transform: translateX(4px); }
-.link:hover span { background-image: linear-gradient(var(--akcent), var(--akcent)); }
 .tekst-link { color: var(--akcent); font-weight: 500; text-decoration: underline; text-decoration-color: var(--mosiadz); text-underline-offset: 4px; padding-block: 12px; margin-block: -12px; }
-.tekst-link:hover { text-decoration-color: var(--akcent); }
 
 /* ---------- Nagłówek ---------- */
 .naglowek {
@@ -185,8 +180,6 @@ main { display: block; padding-bottom: var(--sekcja); }
   content: ''; position: absolute; left: 0; right: 0; bottom: 9px; height: 1px; background: var(--mosiadz);
   opacity: 0; transition: opacity .35s var(--ease);
 }
-.nawigacja a:hover { color: var(--akcent); }
-.nawigacja a:hover::after, .nawigacja a[aria-current='page']::after { opacity: 1; }
 .nawigacja a[aria-current='page'] { color: var(--akcent); }
 .naglowek__tel { display: none; }
 .naglowek__akcje { display: flex; align-items: center; gap: 4px; margin-left: auto; }
@@ -195,13 +188,11 @@ main { display: block; padding-bottom: var(--sekcja); }
   border-radius: var(--pill); color: var(--tekst); transition: color .25s var(--ease);
 }
 .naglowek__fb .ikona { width: 22px; height: 22px; }
-.naglowek__fb:hover, .naglowek__fb:focus-visible { color: var(--akcent); }
 .menu-przycisk {
   display: inline-grid; place-items: center; width: 48px; height: 48px; margin-right: -12px;
   background: none; border: 0; border-radius: var(--pill); color: var(--tekst); cursor: pointer;
 }
 .menu-przycisk .ikona { width: 28px; height: 28px; }
-.menu-przycisk:hover { color: var(--akcent); }
 @media (min-width: 600px) and (max-width: 979px) { .naglowek__tel { display: inline-flex; margin-right: 8px; } }
 @media (min-width: 980px) {
   .nawigacja { display: block; }
@@ -228,7 +219,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 .menu__lista li:first-child a { border-top: 1px solid var(--linia); }
 .menu__nr { font: italic 500 17px/1 var(--serif); color: var(--mosiadz-tekst); }
 .menu__lista a .ikona { align-self: center; width: 22px; height: 22px; color: var(--mosiadz); transition: transform .3s var(--ease), color .3s; }
-.menu__lista a:hover .ikona, .menu__lista a[aria-current='page'] .ikona { color: var(--akcent); transform: translateX(4px); }
 .menu__lista a[aria-current='page'] { color: var(--akcent); font-style: italic; }
 .menu__dol { margin-top: auto; padding-top: 32px; padding-bottom: calc(28px + env(safe-area-inset-bottom)); display: grid; gap: 12px; }
 .menu__dol .status { margin-bottom: 8px; }
@@ -288,7 +278,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 .pieczec__krag text { font: 500 9.6px var(--sans); letter-spacing: .1em; fill: var(--mosiadz-tekst); }
 .pieczec__liczba { position: relative; font: 500 31px/1 var(--serif); letter-spacing: -.02em; }
 .pieczec__liczba small { font-size: .55em; vertical-align: .55em; margin-left: 1px; }
-.pieczec:hover { box-shadow: 0 1px 2px rgba(42, 37, 32, .08), 0 18px 36px -14px rgba(42, 37, 32, .55); }
 .pieczec:focus-visible { border-radius: 50%; outline-offset: 4px; }
 
 @media (min-width: 560px) {
@@ -366,9 +355,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 .kategoria__opis { grid-column: 1 / -1; margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--linia); font-size: 14px; line-height: 1.5; color: var(--tekst-2); }
 .kategoria__cena { grid-column: 1 / -1; margin-top: 6px; font: 500 13px/1 var(--sans); letter-spacing: .02em; color: var(--mosiadz-tekst); }
 @media (max-width: 599px) { .kategoria__opis { display: none; } }
-.kategoria:hover .kategoria__foto::before { opacity: .14; }
-.kategoria:hover .kategoria__tytul { color: var(--akcent); }
-.kategoria:hover .kategoria__tytul .ikona { color: var(--akcent); transform: translateX(4px); }
 .kategoria:focus-visible { outline-offset: 6px; }
 @media (min-width: 1100px) { .kategoria__tytul { font-size: 25px; margin-top: 20px; } .kategoria__nr { margin-top: 20px; font-size: 20px; } .kategoria__opis { font-size: 15px; } }
 
@@ -435,7 +421,6 @@ main { display: block; padding-bottom: var(--sekcja); }
   padding: 20px 20px 18px; background: var(--karta); border: 1px solid var(--linia); border-radius: var(--r-l);
   transition: border-color .3s var(--ease);
 }
-.opinia:hover { border-color: rgba(168, 138, 90, .7); }
 .opinia--aktywna { border-color: var(--mosiadz); }
 .opinia__gora { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .opinia__temat { display: flex; align-items: center; gap: 10px; padding-top: 6px; font: 500 11px/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--akcent); }
@@ -463,7 +448,6 @@ main { display: block; padding-bottom: var(--sekcja); }
   background: transparent; border: 1px solid var(--linia); color: var(--akcent); cursor: pointer;
   transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease), opacity .25s;
 }
-.slider__strzalki button:hover:not(:disabled) { background: var(--akcent); border-color: var(--akcent); color: var(--tlo); }
 .slider__strzalki button:disabled { opacity: .35; cursor: default; }
 .slider__strzalki .ikona { width: 20px; height: 20px; }
 .slider.bez-przewijania .slider__nawig { display: none; }
@@ -572,7 +556,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 .zaproszenie__adres { margin-top: 16px; font-size: 14px; }
 .zaproszenie__adres a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-block: -6px; color: var(--tekst-2); text-decoration: underline; text-decoration-color: var(--mosiadz); text-underline-offset: 4px; }
 .zaproszenie__adres a .ikona { width: 18px; height: 18px; color: var(--akcent); }
-.zaproszenie__adres a:hover { color: var(--akcent); }
 @media (min-width: 560px) {
   .zaproszenie__cta { display: flex; flex-wrap: wrap; justify-content: center; width: auto; }
   .zaproszenie__cta .btn { padding-inline: 26px; }
@@ -596,7 +579,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 .okruszki ol { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
 .okruszki li + li::before { content: '/'; margin-right: 8px; color: var(--mosiadz); }
 .okruszki a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; margin-block: -12px; }
-.okruszki a:hover { color: var(--akcent); text-decoration: underline; text-underline-offset: 4px; }
 .podhero .wstep { margin-top: 14px; }
 .podhero__foto { position: relative; }
 .podhero__foto .luk-rama { --ksztalt: var(--luk-szer); }
@@ -629,7 +611,6 @@ main { display: block; padding-bottom: var(--sekcja); }
   transition: background-color .25s var(--ease), color .25s var(--ease);
 }
 .zakladka__nr { font: italic 500 16px/1 var(--serif); color: var(--mosiadz-tekst); transition: color .25s var(--ease); }
-.zakladka:hover { background: var(--tlo-2); color: var(--tekst); }
 .zakladka[aria-selected='true'] { background: var(--akcent); color: var(--tlo); }
 .zakladka[aria-selected='true'] .zakladka__nr { color: rgba(247, 242, 234, .75); }
 .zakladka:focus-visible { outline-offset: -4px; outline-color: var(--mosiadz); }
@@ -773,7 +754,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 }
 .kafel .etykieta { display: flex; margin-bottom: 8px; }
 .kafel__tel { display: inline-block; margin-top: 4px; font: 500 40px/1.1 var(--serif); letter-spacing: .01em; color: var(--akcent); text-decoration: none; }
-.kafel__tel:hover { color: var(--akcent-ciemny); }
 .kafel__cta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
 .kafel__cta .btn { min-width: 0; }
 .kafel__cta .btn { padding-inline: 12px; }
@@ -782,7 +762,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 .kafel__adres { font-size: 17px; line-height: 1.5; }
 .kafel__akcje { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 14px; }
 .kafel__fb { display: inline-flex; align-items: center; gap: 10px; color: var(--tekst-2); text-decoration: none; min-height: 44px; font-size: 15px; }
-.kafel__fb:hover { color: var(--akcent); }
 .kafel__fb .ikona { width: 22px; height: 22px; }
 .kafel__status { display: flex; margin-top: 4px; }
 .godziny { width: 100%; margin-top: 18px; border-collapse: collapse; font-size: 16px; }
@@ -805,7 +784,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary .ikona { width: 20px; height: 20px; color: var(--akcent); transition: transform .3s var(--ease); }
 .faq details[open] summary .ikona { transform: rotate(45deg); }
-.faq summary:hover { color: var(--akcent); }
 .faq details p { padding: 0 40px 20px 0; color: var(--tekst-2); }
 .faq-bok { margin-bottom: 22px; }
 .faq-dopisek { margin-top: 14px; color: var(--tekst-2); }
@@ -842,7 +820,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 .stopka { background: var(--akcent-ciemny); color: var(--tlo); padding: 36px 0 calc(22px + env(safe-area-inset-bottom)); }
 @media (min-width: 980px) { .stopka { padding: 88px 0 40px; } }
 .stopka a { color: inherit; text-decoration: none; }
-.stopka a:hover { text-decoration: underline; text-decoration-color: var(--mosiadz); text-underline-offset: 4px; }
 .stopka__gora { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 20px; margin-bottom: 22px; border-bottom: 1px solid rgba(168, 138, 90, .4); }
 .stopka__logo .logo__znak img { height: 40px; width: auto; }
 .stopka__logo .logo__nazwa { color: var(--tlo); }
@@ -921,3 +898,32 @@ main { display: block; padding-bottom: var(--sekcja); }
 
 /* bon-blok: kartka bonu zaslania podpis zastepnika — podpis zbedny, lotos zostaje */
 .bon-blok__foto .zastepnik__tytul { display: none; }
+
+/* Style :hover tylko dla urzadzen z realnym wskaznikiem (mysz/trackpad).
+   Bez tego iOS Safari traktuje pierwsze tapniecie jako aktywacje :hover,
+   a dopiero drugie jako klik - linki/kafelki wymagaly dwoch tapniec. */
+@media (hover: hover) and (pointer: fine) {
+  .btn--glowny:hover { background: var(--akcent-ciemny); box-shadow: 0 14px 28px -14px rgba(48, 53, 31, .9); }
+  .btn--obrys:hover { border-color: var(--akcent); background: rgba(74, 80, 54, .06); }
+  .link:hover .ikona { transform: translateX(4px); }
+  .link:hover span { background-image: linear-gradient(var(--akcent), var(--akcent)); }
+  .tekst-link:hover { text-decoration-color: var(--akcent); }
+  .nawigacja a:hover { color: var(--akcent); }
+  .nawigacja a:hover::after, .nawigacja a[aria-current='page']::after { opacity: 1; }
+  .naglowek__fb:hover, .naglowek__fb:focus-visible { color: var(--akcent); }
+  .menu-przycisk:hover { color: var(--akcent); }
+  .menu__lista a:hover .ikona, .menu__lista a[aria-current='page'] .ikona { color: var(--akcent); transform: translateX(4px); }
+  .pieczec:hover { box-shadow: 0 1px 2px rgba(42, 37, 32, .08), 0 18px 36px -14px rgba(42, 37, 32, .55); }
+  .kategoria:hover .kategoria__foto::before { opacity: .14; }
+  .kategoria:hover .kategoria__tytul { color: var(--akcent); }
+  .kategoria:hover .kategoria__tytul .ikona { color: var(--akcent); transform: translateX(4px); }
+  .opinia:hover { border-color: rgba(168, 138, 90, .7); }
+  .slider__strzalki button:hover:not(:disabled) { background: var(--akcent); border-color: var(--akcent); color: var(--tlo); }
+  .zaproszenie__adres a:hover { color: var(--akcent); }
+  .okruszki a:hover { color: var(--akcent); text-decoration: underline; text-underline-offset: 4px; }
+  .zakladka:hover { background: var(--tlo-2); color: var(--tekst); }
+  .kafel__tel:hover { color: var(--akcent-ciemny); }
+  .kafel__fb:hover { color: var(--akcent); }
+  .faq summary:hover { color: var(--akcent); }
+  .stopka a:hover { text-decoration: underline; text-decoration-color: var(--mosiadz); text-underline-offset: 4px; }
+}
