@@ -46,6 +46,7 @@
   --taupe: #8C7F70;
   --otwarte: #5F7A34;
   --zamkniete: #A0694C;
+  --zloty-karta: #D9BA78;      /* złoty z wizytówki, na czarnym tle w hero */
 
   --serif: 'Cormorant Garamond', 'Times New Roman', serif;
   --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
@@ -249,7 +250,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 .hero__foto { order: 3; position: relative; margin-top: 24px; }
 .hero__foto .luk-rama { --ksztalt: var(--luk-szer); }
 .hero__foto .luk { aspect-ratio: 6 / 5; }
-.hero__foto img { object-position: 50% 45%; }
 .hero__lead { order: 4; margin-top: 22px; max-width: 30em; color: var(--tekst-2); font-size: 1.0625rem; }
 .hero__cta { order: 5; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
 .hero__cta .btn { min-width: 0; }
@@ -271,6 +271,30 @@ main { display: block; padding-bottom: var(--sekcja); }
 .pieczec__liczba small { font-size: .55em; vertical-align: .55em; margin-left: 1px; }
 .pieczec:focus-visible { border-radius: 50%; outline-offset: 4px; }
 
+/* wizytówka w łuku hero (zamiast dawnego ażuru/recepcji): czarne tło + kwiat lotosu + teksty w HTML */
+.hero__wizytowka {
+  background: #000;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 7% 9%; gap: clamp(8px, 2vw, 16px); text-align: center;
+}
+.hero__foto .hero__wizytowka img {
+  width: auto; height: auto; max-width: 66%; max-height: 42%; object-fit: contain; flex: none;
+}
+.hero__wiz-imie, .hero__wiz-marka, .hero__wiz-podpis { margin: 0; color: var(--zloty-karta); }
+.hero__wiz-imie {
+  font: 500 clamp(11px, 1.9vw, 15px)/1.3 var(--sans); letter-spacing: .34em; text-transform: uppercase;
+}
+.hero__wiz-marka {
+  font: 500 clamp(30px, 7vw, 46px)/1 var(--serif); letter-spacing: .1em; text-transform: uppercase;
+}
+.hero__wiz-podpis {
+  font: 400 clamp(9px, 1.5vw, 12px)/1.4 var(--sans); letter-spacing: .4em; text-transform: uppercase; opacity: .82;
+}
+/* na szerokościach <900px pieczęć 92% leży w lewym dolnym rogu łuku – tekst przesunięty wyżej, żeby się nie nakładały */
+@media (max-width: 959px) {
+  .hero__wizytowka { justify-content: flex-start; padding-top: 11%; padding-bottom: 32%; }
+}
+
 @media (min-width: 560px) {
   .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
   .hero__cta .btn { padding-inline: 26px; }
@@ -291,7 +315,6 @@ main { display: block; padding-bottom: var(--sekcja); }
   .hero__foto { margin-top: 0; }
   .hero__foto .luk-rama { --ksztalt: var(--luk); }
   .hero__foto .luk { aspect-ratio: 4 / 5; }
-  .hero__foto img { object-position: 50% 50%; }
   .pieczec { bottom: 72px; left: -62px; width: 132px; height: 132px; }
   .pieczec__liczba { font-size: 38px; }
 }
