@@ -235,16 +235,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 /* ---------- Łuk (motyw marki) ---------- */
 .luk { position: relative; display: block; overflow: hidden; border-radius: var(--ksztalt); background: var(--tlo-2); }
 .luk img { width: 100%; height: 100%; object-fit: cover; }
-.luk-rama { position: relative; isolation: isolate; margin: 14px 14px 0 0; }
-.luk-rama::before {
-  content: ''; position: absolute; z-index: -1; top: -14px; right: -14px; bottom: 14px; left: 14px;
-  border: 1px solid var(--mosiadz); border-radius: var(--ksztalt); opacity: .85; pointer-events: none;
-}
-/* cienka linia kości słoniowej wewnątrz łuku */
-.luk--linia::after {
-  content: ''; position: absolute; inset: 8px; border: 1px solid rgba(251, 248, 243, .6);
-  border-radius: var(--ksztalt); pointer-events: none;
-}
+.luk-rama { position: relative; isolation: isolate; }
 
 /* ---------- Hero (strona główna) ---------- */
 .hero { position: relative; isolation: isolate; padding-top: 14px; }
