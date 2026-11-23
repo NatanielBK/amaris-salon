@@ -471,22 +471,17 @@ main { display: block; padding-bottom: var(--sekcja); }
 
 /* ---------- Bon (strona główna) ---------- */
 .bon-blok { display: grid; gap: 32px; align-items: center; }
-.bon-blok__scena { position: relative; margin-bottom: 12px; }
+.bon-blok__scena { position: relative; }
 .bon-blok__foto { --ksztalt: var(--luk-szer); aspect-ratio: 16 / 9; }
 .bon-blok__foto img { object-position: 50% 8%; }
-.bon-blok__karta {
-  position: absolute; left: 10px; bottom: -22px; width: 54%; max-width: 300px; height: auto;
-  border-radius: 6px; box-shadow: var(--cien-karta);
-}
 .bon-blok__tekst p { margin-top: 12px; color: var(--tekst-2); max-width: 30em; }
 .bon-blok__tekst .link { margin-top: 8px; }
 /* okazje i przyciski tylko na komputerze (na telefonie wystarczy link – strona główna ma limit wysokości) */
 .bon-blok .bon-blok__okazje, .bon-blok__cta { display: none; }
 @media (min-width: 900px) {
   .bon-blok { grid-template-columns: 1.05fr .95fr; gap: 96px; }
-  .bon-blok__scena { margin: 0 0 36px; }
   .bon-blok__foto { --ksztalt: var(--luk); aspect-ratio: 4 / 5; max-width: 480px; }
-  .bon-blok__karta { right: auto; left: 52%; bottom: -36px; width: 52%; }
+  .bon-blok__foto img { object-position: 0 50%; }
   .bon-blok__tekst p { margin-top: 18px; }
   .bon-blok .bon-blok__okazje { display: flex; margin-top: 28px; }
   .bon-blok__cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 22px; padding-top: 28px; border-top: 1px solid var(--linia); max-width: 30em; }
@@ -553,12 +548,8 @@ main { display: block; padding-bottom: var(--sekcja); }
   display: grid; justify-items: center; text-align: center; gap: 0;
   padding: 36px 20px 30px; background: var(--tlo-2); border-radius: var(--r-l);
 }
-.zaproszenie__foto { position: relative; width: 148px; margin: 14px 14px 30px 0; }
+.zaproszenie__foto { position: relative; width: 148px; margin: 14px 14px 14px 0; }
 .zaproszenie__foto .luk { aspect-ratio: 4 / 5; }
-.zaproszenie__karta {
-  position: absolute; left: 8px; bottom: -24px; width: 56%; max-width: 160px; height: auto;
-  border-radius: 6px; box-shadow: var(--cien-karta);
-}
 .zaproszenie__tekst { display: grid; justify-items: center; }
 .zaproszenie .orn { margin-bottom: 14px; }
 .zaproszenie p { margin-top: 12px; color: var(--tekst-2); max-width: 30em; }
@@ -578,11 +569,10 @@ main { display: block; padding-bottom: var(--sekcja); }
     grid-template-columns: minmax(0, 340px) 1fr; align-items: center; justify-items: stretch; text-align: left;
     gap: 88px; padding: 72px 80px 72px 72px;
   }
-  .zaproszenie__foto { width: auto; margin: 14px 14px 40px 0; }
+  .zaproszenie__foto { width: auto; margin: 14px 14px 14px 0; }
   .zaproszenie__tekst { justify-items: start; }
   .zaproszenie .orn { justify-content: flex-start; }
   .zaproszenie__cta { justify-content: flex-start; margin-top: 30px; }
-  .zaproszenie__karta { left: 52%; bottom: -36px; width: 52%; max-width: 220px; }
 }
 
 /* ---------- Nagłówek podstron ze zdjęciem ---------- */
@@ -596,18 +586,11 @@ main { display: block; padding-bottom: var(--sekcja); }
 .podhero__foto { position: relative; }
 .podhero__foto .luk-rama { --ksztalt: var(--luk-szer); }
 .podhero__foto .luk { aspect-ratio: 3 / 2; }
-.podhero__bon {
-  position: absolute; left: 0; bottom: -26px; width: 56%; max-width: 300px; height: auto;
-  border-radius: 6px; box-shadow: var(--cien-karta);
-}
-.s-bon .podhero__foto { margin-bottom: 26px; }
 @media (min-width: 900px) {
   .podhero { padding-top: 40px; }
   .podhero__siatka { grid-template-columns: 5fr 7fr; gap: 72px; align-items: center; }
   .podhero h1 { font-size: clamp(3rem, 1.6rem + 3vw, 4.4rem); }
   .podhero__foto .luk { aspect-ratio: 4 / 3; }
-  .podhero__bon { left: -56px; bottom: -40px; width: 46%; max-width: 320px; }
-  .s-bon .podhero__foto { margin-bottom: 40px; }
 }
 .po-hero { padding-top: 44px; }
 @media (min-width: 900px) { .po-hero { padding-top: 88px; } }
