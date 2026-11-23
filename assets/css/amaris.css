@@ -336,7 +336,6 @@ main { display: block; padding-bottom: var(--sekcja); }
 .kategoria__foto { grid-column: 1 / -1; position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--luk); background: var(--tlo-2); }
 .kategoria__foto img { width: 100%; height: 100%; object-fit: cover; }
 .kategoria__foto::before { content: ''; position: absolute; inset: 0; z-index: 1; background: var(--akcent-ciemny); opacity: 0; transition: opacity .45s var(--ease); }
-.kategoria__foto::after { content: ''; position: absolute; inset: 8px; z-index: 1; border: 1px solid rgba(251, 248, 243, .6); border-radius: var(--luk); }
 .kategoria__nr { margin-top: 16px; font: italic 500 18px/1 var(--serif); color: var(--mosiadz-tekst); }
 .kategoria__tytul {
   display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 16px;
