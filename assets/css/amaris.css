@@ -378,7 +378,7 @@ main { display: block; padding-bottom: var(--sekcja); }
   .nastroj__kadr { flex-basis: 24%; }
 }
 @media (min-width: 1000px) {
-  .nastroj__pas { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; overflow: visible; margin-inline: 0; padding: 0; align-items: end; }
+  .nastroj__pas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; overflow: visible; margin-inline: 0; padding: 0; align-items: end; }
   .nastroj__kadr--0 { margin-bottom: 48px; }
 }
 
