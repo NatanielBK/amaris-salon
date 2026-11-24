@@ -110,6 +110,7 @@ h1 em, h2 em { font-style: italic; color: var(--akcent); }
 .przeskocz:focus { top: 12px; }
 
 .wrap { width: 100%; max-width: calc(var(--wrap) + 2 * var(--pad)); margin-inline: auto; padding-inline: var(--pad); }
+.sekcja, .nastroj { scroll-margin-top: calc(var(--h-naglowek) + 16px); }
 .sekcja { padding-top: var(--sekcja); }
 main { display: block; padding-bottom: var(--sekcja); }
 
