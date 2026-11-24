@@ -391,9 +391,9 @@ main { display: block; padding-bottom: var(--sekcja); }
   margin-inline: calc(var(--pad) * -1); padding-inline: var(--pad); scroll-padding-inline: var(--pad);
 }
 .nastroj__pas::-webkit-scrollbar { display: none; }
-.nastroj__kadr { position: relative; flex: 0 0 34%; aspect-ratio: 4 / 5; overflow: hidden; background: var(--tlo-2); scroll-snap-align: start; }
+.nastroj__kadr { position: relative; flex: 0 0 34%; aspect-ratio: 26 / 25; overflow: hidden; background: var(--tlo-2); scroll-snap-align: start; }
 .nastroj__kadr img { width: 100%; height: 100%; object-fit: cover; }
-/* jeden rytm: łuk – prostokąt – łuk…, wszystkie kadry 4:5 */
+/* łuk tylko tam, gdzie wzorek nie dotyka górnych rogów maski; wszystkie kadry 26:25 */
 .nastroj__kadr--0 { border-radius: var(--luk); }
 .nastroj__kadr--1 { border-radius: var(--r); }
 @media (min-width: 700px) {
@@ -551,6 +551,8 @@ main { display: block; padding-bottom: var(--sekcja); }
 }
 .zaproszenie__foto { position: relative; width: 148px; margin: 14px 14px 14px 0; }
 .zaproszenie__foto .luk { aspect-ratio: 4 / 5; }
+/* zdjęcie z Buddą (opinie.html) jest pionowe – 4:5 ucinałoby komodę/lustro */
+.s-opinie .zaproszenie__foto .luk { aspect-ratio: 3 / 4; }
 .zaproszenie__tekst { display: grid; justify-items: center; }
 .zaproszenie .orn { margin-bottom: 14px; }
 .zaproszenie p { margin-top: 12px; color: var(--tekst-2); max-width: 30em; }
@@ -587,6 +589,8 @@ main { display: block; padding-bottom: var(--sekcja); }
 .podhero__foto { position: relative; }
 .podhero__foto .luk-rama { --ksztalt: var(--luk-szer); }
 .podhero__foto .luk { aspect-ratio: 3 / 2; }
+/* zdjęcie z Buddą (zabiegi.html) jest pionowe – nie mieści się w poziomym 3:2 bez ucinania figurki/komody */
+.s-zabiegi .podhero__foto .luk { aspect-ratio: 3 / 4; }
 @media (min-width: 900px) {
   .podhero { padding-top: 40px; }
   .podhero__siatka { grid-template-columns: 5fr 7fr; gap: 72px; align-items: center; }
@@ -679,13 +683,13 @@ main { display: block; padding-bottom: var(--sekcja); }
 .jak-glowa .wstep { margin-top: 12px; }
 .jak-siatka { display: grid; gap: 28px; }
 .jak-siatka__foto { --ksztalt: var(--luk-szer); }
-.jak-siatka__foto .luk { aspect-ratio: 16 / 9; }
+.jak-siatka__foto .luk { aspect-ratio: 3 / 4; }
 .jak-siatka__kroki { align-self: center; }
 @media (min-width: 900px) {
   .jak-glowa { max-width: 44em; margin-bottom: 48px; }
   .jak-siatka { grid-template-columns: 5fr 7fr; gap: 96px; align-items: center; }
   .jak-siatka__foto { --ksztalt: var(--luk); max-width: 400px; }
-  .jak-siatka__foto .luk { aspect-ratio: 4 / 5; }
+  .jak-siatka__foto .luk { aspect-ratio: 3 / 4; }
 }
 .kroki { list-style: none; display: grid; }
 .krok { display: grid; grid-template-columns: 48px 1fr; gap: 4px 14px; padding: 18px 0; border-top: 1px solid var(--linia); }
