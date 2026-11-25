@@ -963,3 +963,13 @@ main { display: block; padding-bottom: var(--sekcja); }
   .faq summary:hover { color: var(--akcent); }
   .stopka a:hover { text-decoration: underline; text-decoration-color: var(--mosiadz); text-underline-offset: 4px; }
 }
+
+/* Marki kosmetyków (pod certyfikatami) */
+.marki { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--linia); }
+.marki__tytul { font: 500 13px/1.3 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--mosiadz-tekst); }
+.marki__lista { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
+.marki__lista li { padding: 14px 14px; background: var(--karta); border: 1px solid var(--linia); border-radius: var(--r-l); }
+.marki__nazwa { display: block; font: 500 19px/1.15 var(--serif); color: var(--tekst); }
+.marki__do { display: block; margin-top: 6px; font-size: 13px; line-height: 1.45; color: var(--tekst-2); }
+@media (min-width: 600px) { .marki__lista li { padding: 16px 18px; } .marki__nazwa { font-size: 21px; } .marki__do { font-size: 14px; } }
+@media (min-width: 1000px) { .marki__lista { grid-template-columns: repeat(4, 1fr); gap: 16px; } .marki__nazwa { font-size: 23px; } }
