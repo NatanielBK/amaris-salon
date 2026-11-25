@@ -387,7 +387,7 @@ main { display: block; padding-bottom: var(--sekcja); }
 }
 .certy__karta { display: flex; flex-direction: column; height: 100%; }
 .certy__foto {
-  display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 5; overflow: hidden;
+  position: relative; display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 5; overflow: hidden;
   border-radius: var(--r-l); background: var(--karta); border: 1px solid var(--linia); box-shadow: var(--cien);
 }
 .certy__foto img { width: 100%; height: 100%; object-fit: contain; padding: 14px; }
